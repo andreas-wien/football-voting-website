@@ -14,7 +14,6 @@ export default function Home() {
     axios
       .get("/api/teams/index")
       .then((response) => {
-        console.log("API Response:", response.data);
         if (Array.isArray(response.data)) {
           setTeams(response.data);
         } else {
