@@ -4,6 +4,7 @@ import Country from "../models/Country.js";
 import "dotenv/config.js";
 
 async function fetchCountries() {
+    console.log("Fetching countries...");
   const response = await axios.get(
     `${process.env.FOOTBALL_API_URL}/teams/countries`,
     {
@@ -25,6 +26,7 @@ async function fetchCountries() {
       { upsert: true, new: true }
     );
   }
+  console.log("Countries have been fetched and saved in MongoDB.");
 }
 
 export default fetchCountries;
