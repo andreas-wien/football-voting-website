@@ -20,10 +20,13 @@ async function fetchTeams() {
   for (const team of teams) {
     const { id, name, logo, country } = team.team;
 
-    const updatedTeam = await Team.findOneAndUpdate(
+    await Team.findOneAndUpdate(
       { team_id: id },
-      { $set: { name, logo, country, votes: 0 } },
-      { upsert: true, new: true } // If the team doesn't exist, create it, and return the updated team
+      {
+        $set: { name, logo, country },
+        $setOnInsert: { votes: 0 },
+      },
+      { upsert: true, new: true }
     );
   }
 }

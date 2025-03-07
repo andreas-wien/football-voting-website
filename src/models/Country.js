@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const CountrySchema = new mongoose.Schema({
-  name: { type: Number, required: true, unique: true },
+  name: { type: String, required: true, unique: true },
   code: { type: String, required: true },
   flag: { type: String, required: true },
 });

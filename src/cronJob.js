@@ -31,7 +31,7 @@ const fetchCountriesCronJob = async () => {
 };
 
 cron.schedule("0 0 * * *", fetchTeamsCronJob);
-cron.schedule("0 2 * * *", fetchCountriesCronJob);
+cron.schedule("0 2 1 * *", fetchCountriesCronJob);
 console.log("Cron jobs are set.");
 
 export default fetchTeams;

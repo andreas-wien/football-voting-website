@@ -14,11 +14,10 @@ async function fetchCountries() {
   );
 
   const countries = response.data.response;
-
   await connectDB();
 
   for (const country of countries) {
-    const { name, code, flag } = country.country;
+    const { name, code, flag } = country;
 
     const updatedCountry = await Country.findOneAndUpdate(
       { name: name },
