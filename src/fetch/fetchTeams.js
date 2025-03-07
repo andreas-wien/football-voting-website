@@ -1,6 +1,6 @@
 import axios from "axios";
-import connectDB from "./lib/db.js";
-import Team from "./models/Team.js";
+import connectDB from "../lib/db.js";
+import Team from "../models/Team.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -16,7 +16,7 @@ async function fetchTeams() {
   });
 
   const teams = response.data.response;
-  
+
   await connectDB();
 
   for (const team of teams) {

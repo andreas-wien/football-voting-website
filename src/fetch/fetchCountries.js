@@ -1,6 +1,6 @@
 import axios from "axios";
-import connectDB from "./lib/db.js";
-import Country from "./models/Country.js";
+import connectDB from "../lib/db.js";
+import Country from "../models/Country.js";
 import dotenv from "dotenv";
 
 dotenv.config();
