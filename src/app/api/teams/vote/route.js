@@ -17,7 +17,7 @@ export async function POST(req) {
 
     const { email } = session.user;
     const { team_id } = await req.json();
-    
+
     await connectDB();
 
     // Check if the user has already voted (check Vote collection, not per team)
