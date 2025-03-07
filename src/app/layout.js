@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Fottball Voting Website",
+  title: "Football Voting Website",
   description: "Vote for your favorite football team",
 };
 
