@@ -1,9 +1,8 @@
 import axios from "axios";
 import connectDB from "../lib/db.js";
 import Country from "../models/Country.js";
-import dotenv from "dotenv";
 
-dotenv.config();
+require('dotenv').config()
 
 async function fetchCountries() {
   const response = await axios.get(
