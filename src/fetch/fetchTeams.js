@@ -47,7 +47,6 @@ async function fetchTeams() {
         );
       }
 
-      // Mark the country as processed
       await Country.updateOne(
         { _id: countryObj._id },
         { $set: { hasBeenProcessed: true } }

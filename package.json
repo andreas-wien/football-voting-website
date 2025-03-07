@@ -1,7 +1,8 @@
 {
   "name": "football-voting-website",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,7 +14,7 @@
     "dotenv": "^16.4.7",
     "mongoose": "^8.12.1",
     "next": "15.2.1",
-    "next-auth": "^4.24.11",
+    "next-auth": "^5.0.0-beta.25",
     "node-cron": "^3.0.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

@@ -2,12 +2,11 @@ import { NextResponse } from "next/server";
 import connectDB from "@/lib/db";
 import Team from "@/models/Team";
 import Vote from "@/models/Vote";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/lib/authOptions";
+import { auth } from "@/auth"
 
 export async function POST(req) {
   try {
-    const session = await getServerSession({ authOptions });
+    const session = await auth();
     if (!session) {
       return NextResponse.json(
         { message: "You must be logged in to vote." },
