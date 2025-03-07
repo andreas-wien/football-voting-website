@@ -1,6 +1,7 @@
 import cron from "node-cron";
 import fetchTeams from "./fetch/fetchTeams.js";
 import fetchCountries from "./fetch/fetchCountries.js";
+import "dotenv/config.js";
 
 let cronJobTeamsRunning = false;
 const fetchTeamsCronJob = async () => {

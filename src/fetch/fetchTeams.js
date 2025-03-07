@@ -2,9 +2,6 @@ import axios from "axios";
 import connectDB from "../lib/db.js";
 import Team from "../models/Team.js";
 
-import { config } from "dotenv";
-config();
-
 const country = "Austria";
 
 async function fetchTeams() {
