@@ -14,24 +14,25 @@ export default function Home() {
   const [votedTeamId, setVotedTeamId] = useState(null); // Track the team the user voted for
 
   useEffect(() => {
-    // Fetch teams when session changes
-    if (session) {
-      axios
-        .get("/api/teams/index")
-        .then((response) => {
-          if (Array.isArray(response.data)) {
-            setTeams(response.data);
-          } else {
-            console.error("Invalid data format:", response.data);
-          }
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error("Error fetching teams:", error);
-          setLoading(false);
-        });
+    // Fetch teams when session changes or at the first load
+    setLoading(true); // Ensure loading state is true while fetching
 
-      // Fetch the user's vote status
+    // Fetch the teams
+    axios
+      .get("/api/teams/index")
+      .then((response) => {
+        if (Array.isArray(response.data)) {
+          setTeams(response.data);
+        } else {
+          console.error("Invalid data format:", response.data);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching teams:", error);
+      });
+
+    // If logged in, fetch the user's vote status
+    if (session) {
       axios
         .get("/api/teams/vote-status")
         .then((voteResponse) => {
@@ -39,9 +40,14 @@ export default function Home() {
         })
         .catch((error) => {
           console.error("Error fetching vote status:", error);
+        })
+        .finally(() => {
+          setLoading(false); // Ensure loading state is false after fetching completes
         });
+    } else {
+      setLoading(false); // Ensure loading state is false when session is not available
     }
-  }, [session]);
+  }, [session]); // Dependency on session
 
   const handleVote = async (teamId) => {
     if (!session) {
@@ -202,17 +208,19 @@ export default function Home() {
                       {team.name}
                     </h3>
                     <p className="text-gray-600">Votes: {team.votes}</p>
-                    <button
-                      onClick={() => handleVote(team.team_id)}
-                      className={`px-5 py-2 rounded-full mt-2 transition-all ${
-                        votedTeamId === team.team_id
-                          ? "bg-gray-400 text-white cursor-not-allowed"
-                          : "bg-blue-500 hover:bg-blue-600 text-white"
-                      }`}
-                      disabled={votedTeamId === team.team_id}
-                    >
-                      {votedTeamId === team.team_id ? "Voted" : "Vote"}
-                    </button>
+                    {session && (
+                      <button
+                        onClick={() => handleVote(team.team_id)}
+                        className={`px-5 py-2 rounded-full mt-2 transition-all ${
+                          votedTeamId === team.team_id
+                            ? "bg-gray-400 text-white cursor-not-allowed"
+                            : "bg-blue-500 hover:bg-blue-600 text-white"
+                        }`}
+                        disabled={votedTeamId === team.team_id}
+                      >
+                        {votedTeamId === team.team_id ? "Voted" : "Vote"}
+                      </button>
+                    )}
                   </div>
                 ))}
               </div>
